@@ -11,7 +11,7 @@ ChatApp es un sistema de mensajería integrado en aplicaciones web que permite a
 - **Frontend:** Vue 3 con Inertia.js  
 - **Técnica de actualización:** Pulling cada 1.5 segundos  
 
-<img src="https://github.com/tuusuario/ChatApp/blob/main/screenshots/chat-interface.png" width="600" />
+<img src="https://github.com/drg471/ChatApp/blob/screenshots/Imagen10.png" width="600" />
 
 ## ✨ Características principales
 
