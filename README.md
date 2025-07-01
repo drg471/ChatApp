@@ -8,7 +8,7 @@ ChatApp es un sistema de mensajería integrado en aplicaciones web que permite a
 - **Lenguaje:** PHP  
 - **Framework:** Laravel  
 - **Base de datos:** MySQL  
-- **Interfaz:** HTML, CSS, JavaScript (jQuery opcional)  
+- **Frontend:** Vue 3 con Inertia.js  
 - **Técnica de actualización:** Pulling cada 1.5 segundos  
 
 <img src="https://github.com/tuusuario/ChatApp/blob/main/screenshots/chat-interface.png" width="600" />
@@ -27,7 +27,7 @@ ChatApp es un sistema de mensajería integrado en aplicaciones web que permite a
 
 Los usuarios pueden iniciar conversaciones introduciendo el correo electrónico del destinatario.
 
-<img src="https://github.com/tuusuario/ChatApp/blob/main/screenshots/new-chat.png" width="400" />
+<img src="https://github.com/tuusuario/ChatApp/blob/main/screenshots/Imagen11.png" width="400" />
 
 ---
 
