@@ -25,9 +25,9 @@ ChatApp es un sistema de mensajería integrado en aplicaciones web que permite a
 - 🔔 **Notificación de mensajes no leídos** con contador visible  
 - 🗑️ **Eliminación de chats** completos  
 
-## 🖼️ Flujo de trabajo
+## 🖼️ Ejemplos de uso
 
-### 1. Iniciar un nuevo chat
+### Iniciar un nuevo chat
 
 Los usuarios pueden iniciar conversaciones introduciendo el correo electrónico del destinatario.
 
@@ -36,7 +36,7 @@ Los usuarios pueden iniciar conversaciones introduciendo el correo electrónico 
 
 ---
 
-### 2. Lista de chats con mensajes no leídos
+### Lista de chats con mensajes no leídos
 
 La interfaz muestra todos los chats activos con un indicador de mensajes no leídos.
 
@@ -44,7 +44,7 @@ La interfaz muestra todos los chats activos con un indicador de mensajes no leí
 
 ---
 
-### 3. Eliminar chats
+### Eliminar chats
 
 Los usuarios pueden eliminar conversaciones completas cuando lo deseen.
 
@@ -52,21 +52,8 @@ Los usuarios pueden eliminar conversaciones completas cuando lo deseen.
 
 ---
 
-## 🛠️ Estructura técnica
+## 🧾 Conclusión
 
-El sistema funciona mediante:
-
-1. **Pulling periódico**: Consulta al servidor cada 1.5 segundos para detectar nuevos mensajes
-2. **Gestión de estados**:
-   - Mensajes leídos/no leídos
-   - Listado de conversaciones activas
-3. **Invitaciones por email**: Validación de usuarios existentes
-
-```php
-// Ejemplo de controlador básico
-class ChatController extends Controller {
-    public function checkNewMessages(Request $request) {
-        // Lógica para verificar mensajes nuevos
-        return response()->json(['newMessages' => $messages]);
-    }
-}
+Gracias por interesarte en ChatApp.  
+Este proyecto está en desarrollo y tu feedback será muy bienvenido para seguir mejorando.  
+No dudes en abrir un issue o contactarme si tienes sugerencias.
