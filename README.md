@@ -13,8 +13,8 @@ ChatApp es un sistema de mensajería integrado en aplicaciones web que permite a
 
 <table>
   <tr>
-    <td><img src="https://github.com/drg471/ChatApp/blob/screenshots/Imagen10.png" width="500" /></td>
-    <td><img src="https://github.com/drg471/ChatApp/blob/screenshots/Imagen111.png" width="500" /></td>
+    <td><img src="https://github.com/drg471/ChatApp/blob/screenshots/Imagen10.png" width="600" /></td>
+    <td><img src="https://github.com/drg471/ChatApp/blob/screenshots/Imagen111.png" width="600" /></td>
   </tr>
 </table>
 
