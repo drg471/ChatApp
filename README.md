@@ -12,6 +12,7 @@ ChatApp es un sistema de mensajería integrado en aplicaciones web que permite a
 - **Técnica de actualización:** Pulling cada 1.5 segundos  
 
 <img src="https://github.com/drg471/ChatApp/blob/screenshots/Imagen10.png" width="600" />
+<img src="https://github.com/drg471/ChatApp/blob/screenshots/Imagen111.png" width="600" />
 
 ## ✨ Características principales
 
@@ -19,7 +20,6 @@ ChatApp es un sistema de mensajería integrado en aplicaciones web que permite a
 - 🔄 **Actualización automática** mediante pulling (consulta cada 1.5 segundos)  
 - 🔔 **Notificación de mensajes no leídos** con contador visible  
 - 🗑️ **Eliminación de chats** completos  
-- 📱 **Diseño responsive** adaptable a diferentes dispositivos  
 
 ## 🖼️ Flujo de trabajo
 
@@ -27,7 +27,8 @@ ChatApp es un sistema de mensajería integrado en aplicaciones web que permite a
 
 Los usuarios pueden iniciar conversaciones introduciendo el correo electrónico del destinatario.
 
-<img src="https://github.com/tuusuario/ChatApp/blob/main/screenshots/Imagen11.png" width="400" />
+<img src="https://github.com/drg471/ChatApp/blob/screenshots/Imagen12.png" width="600" />
+<img src="https://github.com/drg471/ChatApp/blob/screenshots/Imagen13.png" width="600" />
 
 ---
 
@@ -35,23 +36,15 @@ Los usuarios pueden iniciar conversaciones introduciendo el correo electrónico 
 
 La interfaz muestra todos los chats activos con un indicador de mensajes no leídos.
 
-<img src="https://github.com/tuusuario/ChatApp/blob/main/screenshots/chat-list.png" width="400" />
+<img src="https://github.com/drg471/ChatApp/blob/screenshots/Imagen11.png" width="600" />
 
 ---
 
-### 3. Interfaz de mensajería
-
-Área de conversación con historial de mensajes y campo para enviar nuevos.
-
-<img src="https://github.com/tuusuario/ChatApp/blob/main/screenshots/message-interface.png" width="600" />
-
----
-
-### 4. Eliminar chats
+### 3. Eliminar chats
 
 Los usuarios pueden eliminar conversaciones completas cuando lo deseen.
 
-<img src="https://github.com/tuusuario/ChatApp/blob/main/screenshots/delete-chat.png" width="400" />
+<img src="https://github.com/drg471/ChatApp/blob/screenshots/Imagen14.png" width="600" />
 
 ---
 
