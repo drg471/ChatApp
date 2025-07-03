@@ -150,18 +150,6 @@ INSERT INTO chats (user_one_id, user_two_id) VALUES (1, 2);
 -- Chat entre usuario1 (id 1) y usuario3 (id 3) - user_one_id es el menor
 INSERT INTO chats (user_one_id, user_two_id) VALUES (1, 3);
 
-
--- Mensajes en el chat 1 (usuario1 y usuario2)
-INSERT INTO messages (chat_id, sender_id, message) VALUES
-(1, 1, 'Hola Katerine, ¿cómo estás?'),
-(1, 2, 'Hola John, estoy bien ¿y tú?'),
-(1, 1, 'Todo bien por aquí, gracias por preguntar.');
--- Mensajes en el chat 2 (usuario1 y usuario3)
-INSERT INTO messages (chat_id, sender_id, message) VALUES
-(2, 1, 'Hola Brian, ¿recibiste mi informe?'),
-(2, 3, 'Sí, la recibí. Estoy revisando los detalles.'),
-(2, 3, 'Cuando lo tenga listo te envio un mensaje.');
-
 -- Invitación aceptada (que resultó en el chat 1)
 INSERT INTO chat_invitations (inviter_id, invitee_email, chat_id, accepted) VALUES
 (1, 'usuario2@example.com', 1, 1);
