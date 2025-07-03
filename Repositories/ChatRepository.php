@@ -6,6 +6,7 @@ use App\Models\Chat;
 use App\Models\ChatInvitation;
 use App\Models\MessageRead;
 use App\Models\User;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -20,7 +21,6 @@ class ChatRepository extends BaseRepository
 
     public function getAllChatsByUser($user)
     {
-        // Traemos los chats donde es user_one o user_two y cargamos mensajes y usuarios
         $chats = $this->model->where('user_one_id', $user->id)
             ->orWhere('user_two_id', $user->id)
             ->with([
@@ -32,23 +32,18 @@ class ChatRepository extends BaseRepository
             ])
             ->get()
             ->map(function ($chat) use ($user) {
-                // Creamos un nombre para mostrar del otro usuario
                 $otherUser = $chat->user_one_id === $user->id ? $chat->userTwo : $chat->userOne;
 
-                // Último mensaje
                 $lastMessage = $chat->messages->last();
 
-                // ID de los mensajes de este chat que NO envió el usuario actual
                 $messageIds = $chat->messages
                     ->where('sender_id', '!=', $user->id)
                     ->pluck('id');
 
-                // IDs de mensajes que YA leyó este usuario
                 $readMessageIds = MessageRead::where('user_id', $user->id)
                     ->whereIn('message_id', $messageIds)
                     ->pluck('message_id');
 
-                // Total de mensajes sin leer
                 $unread = $messageIds->diff($readMessageIds)->count();
 
                 return [
@@ -76,10 +71,57 @@ class ChatRepository extends BaseRepository
         $messages = $chat->messages->toArray();
 
         foreach ($messages as &$msg) {
-            $msg['created_at'] = (new \Carbon\Carbon($msg['created_at']))->format('H:i d-m-Y');
+            $msg['created_at'] = (new Carbon($msg['created_at']))->format('H:i d-m-Y');
         }
 
         return $messages;
+    }
+
+    public function getLastChatMessagesByChatId($chatId, $beforeId = null)
+    {
+        $limit = 20;
+        $chat = $this->model->findOrFail($chatId);
+
+        $query = $chat->messages()
+            ->where('chat_id', $chatId)
+            ->orderBy('created_at', 'desc')
+            ->with('sender:id,name');
+
+        if ($beforeId) {
+            $query->where('id', '<', $beforeId);
+        }
+
+        $messages = $query->limit($limit)->get();
+        $messages = $messages->sortBy('created_at')->values();
+
+        $hasPreviousMessages = false;
+        $oldestMessageId = null;
+
+        if ($messages->isNotEmpty()) {
+            $oldestMessageId = $messages->first()->id;
+            $hasPreviousMessages = $chat->messages()
+                ->where('chat_id', $chatId)
+                ->when($oldestMessageId, function ($q) use ($oldestMessageId) {
+                    $q->where('id', '<', $oldestMessageId);
+                })
+                ->exists();
+        }
+
+        $processedMessages = $messages->map(function ($msg) {
+            return [
+                'id' => $msg->id,
+                'chat_id' => $msg->chat_id,
+                'sender_id' => $msg->sender_id,
+                'sender' => $msg->sender,
+                'message' => $msg->message, 
+                'created_at' => (new Carbon($msg->created_at))->format('H:i d-m-Y')
+            ];
+        });
+
+        return [
+            'messages' => $processedMessages->values()->toArray(),
+            'has_previous_messages' => $hasPreviousMessages
+        ];
     }
 
     public function saveMessage($chatId, $userSender, $message)
@@ -133,19 +175,20 @@ class ChatRepository extends BaseRepository
         ];
     }
 
-    public function setChatMessagesReadByMessagesUnreadIds($messagesUnreadIds, $userId){
+    public function setChatMessagesReadByMessagesUnreadIds($messagesUnreadIds, $userId)
+    {
         $now = now();
         $rows = [];
 
-        foreach($messagesUnreadIds as $messageId){
-            $rows = [
+        foreach ($messagesUnreadIds as $messageId) {
+            $rows[] = [
                 'message_id' => $messageId,
                 'user_id'    => $userId,
                 'read_at'    => $now,
             ];
-
-            DB::table('message_reads')->insertOrIgnore($rows);
         }
+
+        DB::table('message_reads')->insertOrIgnore($rows);
 
         return true;
     }
