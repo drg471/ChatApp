@@ -23,7 +23,8 @@ ChatApp es un sistema de mensajería integrado en aplicaciones web que permite a
 - 💌 **Inicio de chats por invitación** mediante correo electrónico  
 - 🔄 **Actualización automática** mediante pulling (consulta cada 1.5 segundos)  
 - 🔔 **Notificación de mensajes no leídos** con contador visible  
-- 🗑️ **Eliminación de chats** completos  
+- 🗑️ **Eliminación de chats** completos
+- 🔒 **Mensajes encriptados** para mayor seguridad y privacidad
 
 ## 🖼️ Ejemplos de uso
 
