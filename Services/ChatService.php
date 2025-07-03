@@ -22,26 +22,28 @@ class ChatService
         }
     }
 
-    public function getChatMessages($chatId, $user)
+    public function getChatMessages($chatId, $beforeId)
     {
         try {
-            $chatMessagesEncrypted = $this->chatRepository->getChatMessagesByChatId($chatId);
+            $result = $this->chatRepository->getLastChatMessagesByChatId($chatId, $beforeId);
 
             $chatMessagesDecrypted = [];
 
-            foreach($chatMessagesEncrypted as $chatMessageEncrypted){
-                $messageDecrypted = Crypt::decryptString($chatMessageEncrypted['message']);
-                
+            foreach($result['messages'] as $messageEncrypted){
+
                 $chatMessagesDecrypted [] = [
-                    'id' => $chatMessageEncrypted['id'],
-                    'chat_id' => $chatMessageEncrypted['chat_id'],
-                    'sender_id' => $chatMessageEncrypted['sender_id'],
-                    'message' => $messageDecrypted,
-                    'created_at' => $chatMessageEncrypted['created_at'],
+                    'id' => $messageEncrypted['id'],
+                    'chat_id' => $messageEncrypted['chat_id'],
+                    'sender_id' => $messageEncrypted['sender_id'],
+                    'message' => Crypt::decryptString($messageEncrypted['message']),
+                    'created_at' => $messageEncrypted['created_at'],
                 ];
             }
 
-            return $chatMessagesDecrypted;
+            return [
+                'messages' => $chatMessagesDecrypted, 
+                'has_previous_messages' => $result['has_previous_messages'],
+            ];
         } catch (Exception $e) {
             throw new ChatServiceException("Error obtener los mensajes del chat {$chatId}: ", 0, $e);
         }
