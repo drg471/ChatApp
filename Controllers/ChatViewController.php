@@ -7,7 +7,6 @@ use App\Services\ChatService;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class ChatViewController extends Controller
 {
@@ -26,11 +25,14 @@ class ChatViewController extends Controller
     }
 
     public function getChatMessages($chatId){
-        $user = Auth::user();
+        $beforeId = request()->query('before_id');
 
-        $chatMessages = $this->chatService->getChatMessages($chatId, $user);
+        $result = $this->chatService->getChatMessages($chatId, $beforeId);
 
-        return ApiResponse::success($chatMessages, 'Mensajes obtenidos con éxito.', 200);
+        return ApiResponse::success([
+            'messages' => $result['messages'],
+            'has_previous_messages' => $result['has_previous_messages'],
+        ], 'Mensajes obtenidos con éxito.', 200);
     }
 
     public function sendChatMessage(Request $request){
@@ -91,8 +93,6 @@ class ChatViewController extends Controller
         if(!$deletedChat){
             return ApiResponse::error('Error al eliminar el chat.', 500);
         }
-
-        Log::info('Chat eliminado:: '  . $chatId);
 
         return ApiResponse::success($chatId, 'Chat eliminado con éxito.', 200);
     }
